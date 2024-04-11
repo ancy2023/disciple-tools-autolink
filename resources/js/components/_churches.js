@@ -90,6 +90,9 @@ export class Churches extends DtBase {
         super.connectedCallback();
         setTimeout(this.listenForScrolled.bind(this), 1)
         this.fetch()
+
+        const shareUrl = this.getAttribute('data-share-url');
+        console.log('Share URL:', shareUrl);
     }
 
     listenForScrolled() {
@@ -160,42 +163,51 @@ export class Churches extends DtBase {
         `
     }
 
-    renderGroup(group, opened) {
-        const { fields} = this;
-        const {translations} = $autolink
+  renderGroup(group, opened) {
+    const { fields } = this;
+    const { translations } = $autolink;
+    // Get the share URL from PHP using the `share_url()` function
+    const shareUrl = this.getAttribute('share-url');
 
-        return html`
-            <al-church-tile class="church"
-                         title="${group.post_title}"
-                         key="church-${group.ID}"
-            >
-                ${this.renderCounts(group)}
-                <al-church
-                        .translations="${translations.start_date_label}"
-                        .group="${group}"
-                        .fields="${fields}"
-                        ?opened="${opened}"></al-church>
-                <al-church-menu>
-                    <dt-button context="primary"
-                               href="${ route_url("groups/" + group.ID) }">
-                        ${translations.view_group}
-                    </dt-button>
-                    <dt-button context="primary" 
-                               href="${ route_url("groups/" + group.ID + "/edit") }"
-                    >
-                        ${translations.edit_group}
-                    </dt-button>
-                    <dt-button context="alert"
-                               href="${ route_url("groups/" + group.ID + "/delete?_wpnonce=" + $autolink.nonce) }"
-                               confirm="${translations.delete_group_confirm}">
-                        ${translations.delete_group}
-                    </dt-button>
-                </al-church-menu>
-            </al-church-tile>
-        `
-    }
+    return html`
+        <al-church-tile class="church"
+                     title="${group.post_title}"
+                     key="church-${group.ID}"
+        >
+            ${this.renderCounts(group)}
+            <al-church
+                    .translations="${translations.start_date_label}"
+                    .group="${group}"
+                    .fields="${fields}"
+                    ?opened="${opened}"></al-church>
+            <al-church-menu>
+                <dt-button context="primary"
+                           href="${route_url("groups/" + group.ID)}">
+                    ${translations.view_group}
+                </dt-button>
+                <dt-button context="primary"
+                           href="${route_url("groups/" + group.ID + "/edit")}"
+                >
+                    ${translations.edit_group}
+                </dt-button>
+                <dt-button context="alert"
+                           href="${route_url("groups/" + group.ID + "/delete?_wpnonce=" + $autolink.nonce)}"
+                           confirm="${translations.delete_group_confirm}">
+                    ${translations.delete_group}
+                </dt-button>
 
-    renderCounts(group) {
+              <div class="section__inner">
+                <!-- Pass the share URL to the dt-copy-text component -->
+                <dt-copy-text value="${group.share_url}"></dt-copy-text>
+              </div>
+
+            </al-church-menu>
+        </al-church-tile>
+    `;
+  }
+
+
+  renderCounts(group) {
         const { countFields} = this;
 
         if (!Object.values(countFields).length) {

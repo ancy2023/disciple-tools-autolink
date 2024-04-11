@@ -11,6 +11,13 @@
 use function DT\Autolink\groups_label;
 use function DT\Autolink\route_url;
 $this->layout( 'layouts/tool' );
+use DT\Autolink\Repositories\UserRepository;
+use function DT\Autolink\container;
+use function DT\Autolink\leader_share_url;
+
+$user_repository = container()->make( UserRepository::class );
+$user_name = $user_repository->display_name();
+$coach_name = $user_repository->coach_name();
 ?>
 
 <div class="container">
@@ -34,7 +41,9 @@ $this->layout( 'layouts/tool' );
 			</div>
 
 			<div class="churches__list">
+               
 				<al-churches
+                    share-url='<?php echo esc_url( leader_share_url( $churches['share_url'] ) ); ?>'
 					posts='<?php echo esc_attr( wp_json_encode( $churches['posts'] ) ); ?>'
 					total="<?php echo esc_attr( $churches['total'] ) ?>"
 					fields='<?php echo esc_attr( wp_json_encode( $church_fields ) ); ?>'

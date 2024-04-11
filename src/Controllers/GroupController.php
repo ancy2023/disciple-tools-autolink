@@ -61,6 +61,7 @@ class GroupController {
 				if ( is_array( $value ) && isset( $value['timestamp'] ) ) {
 					$church[ $key ]['formatted'] = dt_format_date( $value['timestamp'], get_option( 'date_format' ) );
 				}
+                $church['share_url'] = leader_share_url($church['id']);
 			}
 
 			return $church;

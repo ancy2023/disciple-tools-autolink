@@ -83,6 +83,7 @@ class AssetServiceProvider extends ServiceProvider {
 					'save'                 => __( 'Save', 'disciple-tools-autolink' ),
 					'more'                 => __( 'More', 'disciple-tools-autolink' ),
 					'close'                => __( 'Close', 'disciple-tools-autolink' ),
+                    'group_url'            => __( 'Group Link', 'disciple-tools-autolink' ),
 				]
 			]);
 		});
