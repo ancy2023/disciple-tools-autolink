@@ -169,12 +169,23 @@ class genmapper {
     }
 
     async popupEditGroupModal(group) {
+
+      console.log(group);
+
         this.editGroupElement.classList.add("edit-group--active");
         const groupData = group.data;
+
+        // const groupShareUrlElement = document.getElementById('leader-share-id');
+        //
+        // const groupShareUrl = groupShareUrlElement ? groupShareUrlElement.getAttribute('share-url') : '';
+
+        console.log('Share URL:', groupShareUrl);
+
         const container = document.getElementById("edit-group-content")
         container.innerHTML = `
               <dt-tile>
                   <div class="section__inner">
+                  <dt-copy-text value="${groupShareUrl}"></dt-copy-text>
                     <al-ajax-form callback="${$autolink.urls.route}/groups/${groupData.id}/edit"></al-ajax-form>
                   </div>
               </dt-tile>

@@ -195,12 +195,6 @@ export class Churches extends DtBase {
                            confirm="${translations.delete_group_confirm}">
                     ${translations.delete_group}
                 </dt-button>
-
-              <div class="section__inner">
-                <!-- Pass the share URL to the dt-copy-text component -->
-                <dt-copy-text value="${group.share_url}"></dt-copy-text>
-              </div>
-
             </al-church-menu>
         </al-church-tile>
     `;
