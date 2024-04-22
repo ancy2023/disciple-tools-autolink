@@ -43,9 +43,6 @@ $coach_name = $user_repository->coach_name();
 			<div class="churches__list">
 
 				<al-churches
-                    id="leader-share-id"
-                    value ='test'
-                    share-url='<?php echo esc_url( leader_share_url() ); ?>'
 					posts='<?php echo esc_attr( wp_json_encode( $churches['posts'] ) ); ?>'
 					total="<?php echo esc_attr( $churches['total'] ) ?>"
 					fields='<?php echo esc_attr( wp_json_encode( $church_fields ) ); ?>'

@@ -174,10 +174,8 @@ class genmapper {
 
         this.editGroupElement.classList.add("edit-group--active");
         const groupData = group.data;
-
-        // const groupShareUrlElement = document.getElementById('leader-share-id');
-        //
-        // const groupShareUrl = groupShareUrlElement ? groupShareUrlElement.getAttribute('share-url') : '';
+                //
+         const groupShareUrl = '';
 
         console.log('Share URL:', groupShareUrl);
 
